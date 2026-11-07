@@ -9,6 +9,20 @@
 [![Keys Cloud Vault](https://img.shields.io/badge/Cloud%20Vault-nusukkeys.wajed.bd-amber.svg)](https://nusukkeys.wajed.bd)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+<br>
+
+<p align="center">
+  <img src="docs/screenshots/dashboard_overview.png" alt="Nusuk Master HQ Dashboard Overview" width="900" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+</p>
+
+<p align="center">
+  <em>Real-time web dashboard running on port 5050 with live Android ADB controls, 100% win-rate quiz solver, and instant cloud sync.</em>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/setup_guide_modal.png" alt="Built-in Setup Guide Modal" width="650" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+</p>
+
 ---
 
 ## ⚡ Highlights
