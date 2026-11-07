@@ -1,0 +1,29 @@
+# Skip any local database of codes (sync directly from https://nusukkeys.wajed.bd)
+nusuk_keys.txt
+*.keys
+*.db
+
+# Local configuration & credentials (use config.example.json)
+config.json
+accounts.json
+nusuk_orchestrator_state.json
+.env
+
+# Logs & temporary files
+*.log
+nusuk_orchestrator.log
+nusuk_harvester.log
+orch_dump.xml
+/sdcard/
+
+# Python cache & environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# OS artifacts
+.DS_Store
+Thumbs.db

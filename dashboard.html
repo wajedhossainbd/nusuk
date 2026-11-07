@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nusuk Automation HQ | Galaxy S9+</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d11;
+      --card-bg: #14171f;
+      --card-border: #232836;
+      --card-hover: #1a1f2c;
+      --accent: #e5a93b;
+      --accent-glow: rgba(229, 169, 59, 0.25);
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dark: #6b7280;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Outfit', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--sans);
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #d5b66f, #8e6c27);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .logo-icon svg { width: 24px; height: 24px; stroke: #0b0d11; fill: none; stroke-width: 2.2; }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+    }
+
+    .dot-live {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--text-dark);
+    }
+
+    .dot-running { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); animation: pulse 1.5s infinite; }
+    .dot-break { background: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue); }
+    .dot-topup { background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+    }
+
+    /* Grid Layouts */
+    .grid-top {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-value {
+      font-size: 32px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .card-subtext {
+      font-size: 12px;
+      color: var(--text-dark);
+      margin-top: 6px;
+      font-family: var(--mono);
+    }
+
+    /* Main Sections Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      font-family: var(--sans);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+    .btn-primary:hover { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+    .btn-danger:hover { background: rgba(239, 68, 68, 0.25); color: #fff; }
+
+    .btn-amber {
+      background: linear-gradient(135deg, #e5a93b, #b45309);
+      color: #0b0d11;
+      font-weight: 700;
+    }
+    .btn-amber:hover { box-shadow: 0 4px 15px var(--accent-glow); }
+
+    .btn-secondary {
+      background: #1f2430;
+      border-color: var(--card-border);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover { background: #272e3d; border-color: #3b4254; }
+
+    .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 8px; }
+
+    /* Control Panel */
+    .controls-strip {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    /* Inputs */
+    .input-box {
+      width: 100%;
+      background: #0d1017;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: var(--mono);
+      transition: border 0.15s;
+    }
+    .input-box:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    select.input-box {
+      font-family: var(--sans);
+      cursor: pointer;
+    }
+
+    /* Terminal Console */
+    .console-box {
+      background: #08090d;
+      border: 1px solid #1c212d;
+      border-radius: 12px;
+      padding: 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      height: 320px;
+      overflow-y: auto;
+      color: #d1d5db;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .log-line { margin-bottom: 4px; line-height: 1.4; }
+    .log-correct { color: #34d399; font-weight: 600; }
+    .log-gemini { color: #60a5fa; }
+    .log-batch { color: #fbbf24; }
+    .log-error { color: #f87171; }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+      padding: 10px 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+
+    tr:hover td { background: var(--card-hover); }
+
+    /* Progress bar */
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.08);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #3b82f6);
+      transition: width 0.3s ease;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      padding: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .modal-header h3 { font-size: 18px; font-weight: 700; }
+    .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="logo-group">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4"/><path d="M12 12l8 8m-4-4l2-2m2 2l2-2"/></svg>
+      </div>
+      <div>
+        <div class="brand-title">NUSUK MASTER HQ <span style="font-size: 11px; padding: 2px 8px; border-radius: 6px; background: rgba(229,169,59,0.15); color: var(--accent); border: 1px solid var(--accent-glow);">v2.0 OPEN SOURCE</span></div>
+        <div class="brand-subtitle" id="deviceSubtitle">Autonomous Quiz & Key Orchestrator • ADB Connected</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+      <button class="btn btn-secondary btn-sm" onclick="openModal('guideModal')" style="border-color: var(--accent); color: var(--accent); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+        <span>📖 Setup Guide</span>
+      </button>
+      <a href="https://nusukkeys.wajed.bd" target="_blank" class="btn btn-amber btn-sm" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; background: linear-gradient(135deg, #d4af37, #aa8010); color: #071713;" title="Open Official Live Keys Vault">
+        <span>🌐 nusukkeys.wajed.bd</span>
+      </a>
+      <div id="statusPill" class="badge-status">
+        <span id="statusDot" class="dot-live"></span>
+        <span id="statusText">CONNECTING...</span>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="triggerAction('stop')" style="background: #dc2626; color: #fff; font-weight: 700; box-shadow: 0 0 10px rgba(220,38,38,0.4);" title="Immediately halt any active quiz or key top-up run">🛑 EMERGENCY STOP</button>
+      <button class="btn btn-secondary btn-sm" onclick="triggerAction('restore_screen')" title="Restore normal screen brightness on phone">☀️ Normal Brightness</button>
+      <button class="btn btn-secondary btn-sm" onclick="triggerAction('dim_screen')" title="Dim screen to 0 for maximum AMOLED power saving">🌙 Dim Screen</button>
+    </div>
+  </header>
+
+  <!-- Top Metrics Row -->
+  <div class="grid-top">
+    <!-- Active Account Card -->
+    <div class="card">
+      <div class="card-title">
+        <span>Active Account</span>
+        <button class="btn btn-secondary btn-sm" onclick="openAddAccountModal()">+ New</button>
+      </div>
+      <select id="accountSelect" class="input-box" style="margin-bottom: 10px; font-weight: 600;" onchange="switchAccount(this.value)">
+        <option value="">Loading accounts...</option>
+      </select>
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div>
+          <span style="font-size: 24px; font-weight: 800; font-family: var(--mono); color: var(--accent);" id="accountBalance">--</span>
+          <span style="font-size: 12px; color: var(--text-muted);"> keys left</span>
+        </div>
+        <div style="text-align: right;">
+          <span style="font-size: 14px; font-family: var(--mono); color: var(--accent-green);" id="accountRedeemed">--</span>
+          <span style="font-size: 11px; color: var(--text-muted);"> redeemed</span>
+        </div>
+      </div>
+      <div class="card-subtext" id="accountSubtext">Next key index: #--</div>
+    </div>
+
+    <!-- Quiz Batch Progress -->
+    <div class="card">
+      <div class="card-title">Batch Progress</div>
+      <div class="card-value">
+        <span id="batchCountDisplay">0</span>
+        <span style="font-size: 18px; color: var(--text-dark);" id="batchTargetDisplay">/ 20</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div id="batchProgressFill" class="progress-bar-fill" style="width: 0%;"></div>
+      </div>
+      <div class="card-subtext" id="batchSubtext">Status: Idle</div>
+    </div>
+
+    <!-- Trivia Performance -->
+    <div class="card">
+      <div class="card-title">Umrah Draw Solves</div>
+      <div class="card-value" style="color: var(--accent-green);">
+        <span id="correctSolves">0</span>
+        <span style="font-size: 15px; color: var(--text-muted);" id="winRateDisplay">(100% Win)</span>
+      </div>
+      <div class="card-subtext" id="triviaSubtext">0 total questions attempted</div>
+    </div>
+
+    <!-- Keys Pool Card -->
+    <div class="card">
+      <div class="card-title">
+        <span>Master Keys Pool</span>
+        <button class="btn btn-amber btn-sm" onclick="syncKeysFromWeb()" id="syncWebBtn" title="Sync newly added keys from nusuk-key.pages.dev">🔄 Web Sync</button>
+      </div>
+      <div class="card-value" style="color: var(--accent);" id="poolCountDisplay">
+        9,078
+      </div>
+      <div class="card-subtext" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+        <span>Online verified codes</span>
+        <button class="btn btn-secondary btn-sm" style="padding: 3px 8px; font-size: 11px;" onclick="openPasteKeysModal()">+ Paste Codes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Grid: Controls + AI Setup -->
+  <div class="main-grid">
+    <!-- Left Column: Controls & Execution -->
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      
+      <!-- Primary Autonomous Controls -->
+      <div class="card">
+        <div class="card-title">Autonomous Quiz Engine Controls</div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Runs 20 trivia questions, pauses 30s to simulate natural human activity, and automatically switches to the Key Redeemer when keys drop below 10 to top back up to 100.
+        </p>
+
+        <div class="controls-strip">
+          <button id="btnStartLoop" class="btn btn-primary" onclick="triggerAction('start')">
+            ▶ Start Autonomous Loop
+          </button>
+          <button id="btnPauseLoop" class="btn btn-danger" onclick="triggerAction('stop')" style="background: rgba(220,38,38,0.2); border-color: #ef4444; color: #fca5a5;">
+            🛑 Stop Current Run
+          </button>
+          <button class="btn btn-amber" onclick="triggerAction('topup')">
+            🔑 Top Up Keys Now
+          </button>
+          <button class="btn btn-secondary" onclick="triggerAction('solve_one')">
+            🎯 Solve 1 Question
+          </button>
+        </div>
+
+        <!-- Live Question Monitor Banner -->
+        <div id="liveQuestionBanner" style="margin-top: 18px; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 12px; display: none;">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 4px;">Latest Screen Question</div>
+          <div id="liveQText" style="font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 8px;">--</div>
+          <div style="display: flex; gap: 16px; font-size: 12px; font-family: var(--mono);">
+            <div>Answer: <strong id="liveAnsText" style="color: var(--accent-green);">--</strong></div>
+            <div>Result: <strong id="liveResText">--</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Terminal Activity Log -->
+      <div class="card">
+        <div class="card-title">
+          <span>Live Execution Console</span>
+          <button class="btn btn-secondary btn-sm" onclick="clearConsole()">Clear</button>
+        </div>
+        <div id="consoleLog" class="console-box">Connecting to engine logs...</div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Gemini API & Multi-Account Settings -->
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+
+      <!-- Gemini AI Configuration -->
+      <div class="card">
+        <div class="card-title">
+          <span>Google Gemini API</span>
+          <span id="geminiStatusBadge" style="font-size: 11px; font-family: var(--mono); color: var(--accent-green);"></span>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+          Paste your Google AI Studio key below. The engine uses Gemini 2.5 Flash to instantly resolve any question not yet in your local database.
+        </p>
+
+        <div style="margin-bottom: 12px;">
+          <input id="geminiApiKeyInput" type="password" class="input-box" placeholder="AIzaSy..." style="margin-bottom: 8px;">
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-amber btn-sm" style="flex: 1;" onclick="saveGeminiKey()">💾 Save Key</button>
+            <button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="testGeminiKey()">⚡ Test Key</button>
+          </div>
+        </div>
+        <div id="geminiTestOutput" style="font-size: 11px; font-family: var(--mono); padding: 8px; border-radius: 8px; background: #0a0c10; display: none;"></div>
+      </div>
+
+      <!-- Batch Parameters -->
+      <div class="card">
+        <div class="card-title">Human Simulation Settings</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Batch Size</label>
+            <input id="cfgBatchSize" type="number" class="input-box" value="20" min="5" max="50">
+          </div>
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Break Time (sec)</label>
+            <input id="cfgBreakTime" type="number" class="input-box" value="30" min="5" max="180">
+          </div>
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Min Keys Threshold</label>
+            <input id="cfgMinKeys" type="number" class="input-box" value="10" min="2" max="30">
+          </div>
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Top-Up Target</label>
+            <input id="cfgTopUpTarget" type="number" class="input-box" value="100" min="20" max="150">
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 14px;" onclick="saveEngineConfig()">Update Rules</button>
+      </div>
+
+      <!-- Verified Knowledge Base Preview -->
+      <div class="card">
+        <div class="card-title">
+          <span>Islamic Knowledge Base</span>
+          <span style="font-family: var(--mono); color: var(--accent);" id="kbCountBadge">6 Q&A</span>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted);">
+          Every verified correct answer is permanently saved. When a question re-appears across any account, it answers with 100% instant zero-latency accuracy.
+        </p>
+        <button class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 10px;" onclick="scrollToKB()">View All Q&As</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Multi-Account Table Section -->
+  <div class="card" style="margin-bottom: 24px;">
+    <div class="card-title">
+      <span>Family & Multi-Account Overview</span>
+      <button class="btn btn-secondary btn-sm" onclick="openAddAccountModal()">+ Add New Family Account</button>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Account Email / Name</th>
+            <th>Keys in App</th>
+            <th>Total Redeemed</th>
+            <th>Next Key Index</th>
+            <th>Questions Solved</th>
+            <th>Correct / Rate</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="accountsTableBody">
+          <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Loading accounts...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Knowledge Base Table Section -->
+  <div class="card" id="kbSection">
+    <div class="card-title">
+      <span>Verified Trivia Knowledge Base</span>
+      <input type="text" id="kbSearchInput" class="input-box" placeholder="Search questions or answers..." style="max-width: 300px; padding: 6px 12px; font-size: 12px;" oninput="filterKB()">
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Question</th>
+            <th>Verified Correct Answer</th>
+          </tr>
+        </thead>
+        <tbody id="kbTableBody">
+          <tr><td colspan="3" style="text-align: center; color: var(--text-muted);">Loading database...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal: Setup & User Guide -->
+<div id="guideModal" class="modal-backdrop">
+  <div class="modal" style="max-width: 680px; max-height: 85vh; overflow-y: auto;">
+    <div class="modal-header">
+      <h3 style="display: flex; align-items: center; gap: 8px;">📖 Complete Setup & User Guide</h3>
+      <button class="close-btn" onclick="closeModal('guideModal')">&times;</button>
+    </div>
+    
+    <div style="font-size: 13px; line-height: 1.6; color: var(--text-main); display: flex; flex-direction: column; gap: 16px;">
+      
+      <!-- Step 1 -->
+      <div style="padding: 12px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 10px;">
+        <div style="font-weight: 700; color: var(--accent-blue); margin-bottom: 4px;">📱 Step 1: Connect Your Android Phone over ADB</div>
+        <p style="color: var(--text-muted); margin-bottom: 6px;">
+          1. On your phone, go to <b>Settings &gt; About Phone</b> and tap <b>Build Number</b> 7 times to enable Developer Options.<br>
+          2. In <b>Developer Options</b>, enable <b>USB Debugging</b> (and "Stay Awake" while charging).<br>
+          3. Plug your phone into your Mac/PC via USB cable, or connect via Wi-Fi: <code style="font-family: var(--mono); color: var(--accent);">adb connect &lt;phone-ip&gt;:5555</code>.<br>
+          4. When prompted on your phone screen, check "Always allow from this computer" and tap <b>Allow</b>.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="padding: 12px; background: rgba(229, 169, 59, 0.08); border: 1px solid rgba(229, 169, 59, 0.25); border-radius: 10px;">
+        <div style="font-weight: 700; color: var(--accent); margin-bottom: 4px;">🤖 Step 2: Get a Free Google Gemini API Key</div>
+        <p style="color: var(--text-muted); margin-bottom: 6px;">
+          1. Visit <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent); font-weight: 600;">Google AI Studio (aistudio.google.com)</a>.<br>
+          2. Sign in with any Google account and click <b>Create API key</b> (100% Free tier).<br>
+          3. Copy your key, paste it into the <b>Google Gemini API</b> card on this dashboard, and click <b>Save Key</b>.<br>
+          4. Click <b>⚡ Test Key</b> to verify your live AI connection.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="padding: 12px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px;">
+        <div style="font-weight: 700; color: var(--accent-green); margin-bottom: 4px;">🔑 Step 3: Synchronize Live Referral Keys</div>
+        <p style="color: var(--text-muted); margin-bottom: 6px;">
+          Click the orange <b>Web Sync</b> button on the <b>Master Keys Pool</b> card above.<br>
+          The dashboard connects directly to the official cloud vault at <a href="https://nusukkeys.wajed.bd" target="_blank" style="color: var(--accent-green); font-weight: 600;">nusukkeys.wajed.bd</a> and downloads over 82,000+ verified referral codes instantly!
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="padding: 12px; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 10px;">
+        <div style="font-weight: 700; color: var(--accent-purple); margin-bottom: 4px;">🚀 Step 4: Start Autonomous Automation</div>
+        <p style="color: var(--text-muted); margin-bottom: 6px;">
+          1. Open the <b>Nusuk app</b> on your Android phone.<br>
+          2. Tap the menu, scroll down to <b>Competitions & Challenges</b>, and tap <b>Play Now!</b>.<br>
+          3. On this dashboard, click <b>▶ START AUTONOMOUS LOOP</b>.<br>
+          4. The engine will automatically solve questions using the 377+ built-in knowledge base + Gemini AI, redeem referral keys whenever your balance is low, and take human-like breather pauses between batches!
+        </p>
+      </div>
+
+      <!-- Anti-Ban & Tips -->
+      <div style="padding: 10px; background: rgba(255, 255, 255, 0.04); border-radius: 8px; font-size: 12px; color: var(--text-muted);">
+        <b>🛡️ Built-in Anti-Ban Features:</b> AMOLED screen dimming (saves battery & burn-in), randomized response jitter (0.8s - 2.5s), automatic 30s rest breaks after each 20-question batch, and instant emergency stop button.
+      </div>
+
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; margin-top: 18px;">
+      <button class="btn btn-amber" onclick="closeModal('guideModal')">Got it! Let's Start</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Add Account -->
+<div id="addAccountModal" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add New Family Account</h3>
+      <button class="close-btn" onclick="closeModal('addAccountModal')">&times;</button>
+    </div>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+      Add another account to reuse all 9,078 keys from the beginning.
+    </p>
+    <div style="margin-bottom: 12px;">
+      <label style="font-size: 12px; color: var(--text-muted);">Email Address</label>
+      <input id="newAccountEmail" type="email" class="input-box" placeholder="family@gmail.com">
+    </div>
+    <div style="margin-bottom: 18px;">
+      <label style="font-size: 12px; color: var(--text-muted);">Display Name (Optional)</label>
+      <input id="newAccountName" type="text" class="input-box" placeholder="e.g. Sister / Father">
+    </div>
+    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+      <button class="btn btn-secondary" onclick="closeModal('addAccountModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitNewAccount()">Create & Switch</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Paste Keys -->
+<div id="pasteKeysModal" class="modal-backdrop">
+  <div class="modal" style="max-width: 600px;">
+    <div class="modal-header">
+      <h3>Paste New Keys into Master Pool</h3>
+      <button class="close-btn" onclick="closeModal('pasteKeysModal')">&times;</button>
+    </div>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+      Paste any new codes below (separated by spaces or newlines). The engine will automatically de-duplicate against the existing pool.
+    </p>
+    <textarea id="pastedKeysTextarea" rows="8" class="input-box" placeholder="NG-xxxxxxxx&#10;NG-yyyyyyyy"></textarea>
+    <div id="pasteKeysFeedback" style="font-size: 12px; margin-top: 8px; color: var(--accent);"></div>
+    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 14px;">
+      <button class="btn btn-secondary" onclick="closeModal('pasteKeysModal')">Cancel</button>
+      <button class="btn btn-amber" onclick="submitPastedKeys()">Add to Pool</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let rawKB = {};
+  let pollInterval = null;
+
+  async function fetchStatus() {
+    try {
+      const res = await fetch('/api/status');
+      const data = await res.json();
+      renderStatus(data);
+    } catch (e) {
+      console.error('Fetch status error:', e);
+    }
+  }
+
+  function renderStatus(d) {
+    // 1. Status Pill
+    const pill = document.getElementById('statusPill');
+    const dot = document.getElementById('statusDot');
+    const text = document.getElementById('statusText');
+    const btnStart = document.getElementById('btnStartLoop');
+    const btnPause = document.getElementById('btnPauseLoop');
+
+    dot.className = 'dot-live';
+    if (d.status === 'PLAYING_QUIZ') {
+      dot.classList.add('dot-running');
+      text.innerText = 'PLAYING QUIZ';
+    } else if (d.status === 'BATCH_BREAK') {
+      dot.classList.add('dot-break');
+      text.innerText = `BREATHER BREAK (${d.break_seconds_left}s)`;
+    } else if (d.status === 'TOPPING_UP_KEYS') {
+      dot.classList.add('dot-topup');
+      text.innerText = 'REDEEMING KEYS...';
+    } else {
+      text.innerText = 'IDLE';
+    }
+
+    if (d.is_running) {
+      btnStart.disabled = true;
+      btnPause.disabled = false;
+      btnPause.style.background = '#dc2626';
+      btnPause.style.color = '#fff';
+    } else {
+      btnStart.disabled = false;
+      btnPause.disabled = false;
+      btnPause.style.background = 'rgba(220,38,38,0.2)';
+      btnPause.style.color = '#fca5a5';
+    }
+
+    // 2. Active Account
+    const acc = d.account_info || {};
+    document.getElementById('accountBalance').innerText = acc.keys_balance ?? 0;
+    document.getElementById('accountRedeemed').innerText = `${acc.keys_redeemed ?? 0} redeemed`;
+    document.getElementById('accountSubtext').innerText = `Next key index: #${acc.last_key_index ?? 0} / ${d.keys_pool_total}`;
+
+    // Populate Account Dropdown
+    const sel = document.getElementById('accountSelect');
+    const currentVal = sel.value;
+    sel.innerHTML = '';
+    for (const email in d.all_accounts) {
+      const item = d.all_accounts[email];
+      const opt = document.createElement('option');
+      opt.value = email;
+      opt.innerText = `${item.name || email} (${email})`;
+      if (email === d.active_account) opt.selected = true;
+      sel.appendChild(opt);
+    }
+
+    // 3. Batch metrics
+    document.getElementById('batchCountDisplay').innerText = d.batch_count;
+    document.getElementById('batchTargetDisplay').innerText = `/ ${d.questions_per_batch}`;
+    const pct = Math.min(100, Math.round((d.batch_count / (d.questions_per_batch || 20)) * 100));
+    document.getElementById('batchProgressFill').style.width = `${pct}%`;
+    document.getElementById('batchSubtext').innerText = d.status === 'BATCH_BREAK' ? `Resting: ${d.break_seconds_left}s left` : `Batch status: ${d.status}`;
+
+    // 4. Trivia metrics
+    const answered = acc.questions_answered || 0;
+    const correct = acc.questions_correct || 0;
+    document.getElementById('correctSolves').innerText = correct;
+    const winRate = answered > 0 ? Math.round((correct / answered) * 100) : 100;
+    document.getElementById('winRateDisplay').innerText = `(${winRate}% Win)`;
+    document.getElementById('triviaSubtext').innerText = `${answered} total questions solved`;
+
+    // 5. Pool count
+    document.getElementById('poolCountDisplay').innerText = Number(d.keys_pool_total).toLocaleString();
+
+    // 6. Gemini status
+    const gemStatus = document.getElementById('geminiStatusBadge');
+    if (d.has_gemini_key) {
+      gemStatus.innerText = `● ${d.gemini_masked_key}`;
+      gemStatus.style.color = '#10b981';
+    } else {
+      gemStatus.innerText = '⚠️ NOT SET';
+      gemStatus.style.color = '#ef4444';
+    }
+
+    // 7. Latest Question Banner
+    if (d.last_question) {
+      document.getElementById('liveQuestionBanner').style.display = 'block';
+      document.getElementById('liveQText').innerText = d.last_question;
+      document.getElementById('liveAnsText').innerText = d.last_answer;
+      document.getElementById('liveResText').innerText = d.last_result;
+      document.getElementById('liveResText').style.color = d.last_result.includes('Correct') ? '#10b981' : '#f87171';
+    }
+
+    // 8. Terminal Logs
+    if (d.logs && d.logs.length) {
+      const c = document.getElementById('consoleLog');
+      c.innerHTML = d.logs.map(line => {
+        let cls = 'log-line';
+        if (line.includes('Correct') || line.includes('SUCCESS')) cls += ' log-correct';
+        else if (line.includes('Gemini')) cls += ' log-gemini';
+        else if (line.includes('Batch')) cls += ' log-batch';
+        else if (line.includes('Error') || line.includes('failed')) cls += ' log-error';
+        return `<div class="${cls}">${escapeHtml(line)}</div>`;
+      }).join('');
+      c.scrollTop = c.scrollHeight;
+    }
+
+    // 9. Accounts Table
+    renderAccountsTable(d.all_accounts, d.active_account);
+  }
+
+  function renderAccountsTable(accs, activeEmail) {
+    const tbody = document.getElementById('accountsTableBody');
+    let html = '';
+    for (const email in accs) {
+      const a = accs[email];
+      const isAct = email === activeEmail;
+      const rate = a.questions_answered > 0 ? Math.round((a.questions_correct / a.questions_answered) * 100) : 100;
+      html += `
+        <tr style="${isAct ? 'background: rgba(229,169,59,0.06); font-weight: 600;' : ''}">
+          <td>
+            <div>${escapeHtml(a.name || email)} ${isAct ? '<span style="color:var(--accent); font-size:11px;">[ACTIVE]</span>' : ''}</div>
+            <div style="font-size:11px; color:var(--text-dark);">${escapeHtml(email)}</div>
+          </td>
+          <td style="font-family:var(--mono); color:var(--accent);">${a.keys_balance} keys</td>
+          <td style="font-family:var(--mono);">${a.keys_redeemed}</td>
+          <td style="font-family:var(--mono); color:var(--text-muted);">#${a.last_key_index}</td>
+          <td style="font-family:var(--mono);">${a.questions_answered}</td>
+          <td style="font-family:var(--mono); color:var(--accent-green);">${a.questions_correct} (${rate}%)</td>
+          <td>
+            ${isAct ? '<span style="color:var(--text-dark); font-size:12px;">Active</span>' : `<button class="btn btn-secondary btn-sm" onclick="switchAccount('${escapeHtml(email)}')">Switch</button>`}
+          </td>
+        </tr>
+      `;
+    }
+    tbody.innerHTML = html;
+  }
+
+  async function fetchKB() {
+    try {
+      const res = await fetch('/api/knowledge_base');
+      rawKB = await res.json();
+      document.getElementById('kbCountBadge').innerText = `${Object.keys(rawKB).length} Q&A`;
+      filterKB();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function filterKB() {
+    const q = (document.getElementById('kbSearchInput').value || '').toLowerCase();
+    const tbody = document.getElementById('kbTableBody');
+    let html = '';
+    let i = 1;
+    for (const question in rawKB) {
+      const ans = rawKB[question];
+      if (!q || question.toLowerCase().includes(q) || ans.toLowerCase().includes(q)) {
+        html += `
+          <tr>
+            <td style="font-family:var(--mono); color:var(--text-dark);">${i++}</td>
+            <td style="font-weight:600;">${escapeHtml(question)}</td>
+            <td style="color:var(--accent-green); font-family:var(--mono); font-weight:700;">${escapeHtml(ans)}</td>
+          </tr>
+        `;
+      }
+    }
+    tbody.innerHTML = html || '<tr><td colspan="3" style="text-align:center; color:var(--text-dark);">No questions match search.</td></tr>';
+  }
+
+  // --- ACTIONS ---
+  async function triggerAction(action) {
+    try {
+      await fetch('/api/control', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action })
+      });
+      fetchStatus();
+    } catch (e) { alert('Action error: ' + e); }
+  }
+
+  async function switchAccount(email) {
+    if (!email) return;
+    try {
+      await fetch('/api/accounts/switch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      fetchStatus();
+    } catch (e) { alert('Switch account error: ' + e); }
+  }
+
+  async function saveGeminiKey() {
+    const key = document.getElementById('geminiApiKeyInput').value.trim();
+    if (!key) return alert('Please enter a valid Gemini API key.');
+    try {
+      await fetch('/api/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gemini_api_key: key })
+      });
+      document.getElementById('geminiApiKeyInput').value = '';
+      alert('Gemini API Key saved successfully!');
+      fetchStatus();
+    } catch (e) { alert('Save error: ' + e); }
+  }
+
+  async function testGeminiKey() {
+    const key = document.getElementById('geminiApiKeyInput').value.trim();
+    const out = document.getElementById('geminiTestOutput');
+    out.style.display = 'block';
+    out.innerText = 'Testing connection with Gemini 1.5 Flash...';
+    try {
+      const res = await fetch('/api/config/test_gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key })
+      });
+      const data = await res.json();
+      out.style.color = data.success ? '#10b981' : '#f87171';
+      out.innerText = data.message;
+    } catch (e) {
+      out.style.color = '#f87171';
+      out.innerText = 'Test request error: ' + e;
+    }
+  }
+
+  async function saveEngineConfig() {
+    const payload = {
+      questions_per_batch: parseInt(document.getElementById('cfgBatchSize').value),
+      batch_break_seconds: parseInt(document.getElementById('cfgBreakTime').value),
+      min_keys_threshold: parseInt(document.getElementById('cfgMinKeys').value),
+      target_keys_topup: parseInt(document.getElementById('cfgTopUpTarget').value)
+    };
+    try {
+      await fetch('/api/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      alert('Rules saved successfully!');
+      fetchStatus();
+    } catch (e) { alert('Save error: ' + e); }
+  }
+
+  async function syncKeysFromWeb() {
+    const btn = document.getElementById('syncWebBtn');
+    btn.disabled = true;
+    btn.innerText = 'Syncing...';
+    try {
+      const res = await fetch('/api/keys/sync_web', { method: 'POST' });
+      const data = await res.json();
+      alert(`Sync Complete! Added ${data.new_keys_added} new keys. Total: ${data.total_keys}`);
+      fetchStatus();
+    } catch (e) { alert('Sync error: ' + e); }
+    finally {
+      btn.disabled = false;
+      btn.innerText = '🔄 Web Sync';
+    }
+  }
+
+  async function submitPastedKeys() {
+    const text = document.getElementById('pastedKeysTextarea').value.trim();
+    if (!text) return alert('Please paste some codes.');
+    try {
+      const res = await fetch('/api/keys/paste', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      const data = await res.json();
+      document.getElementById('pasteKeysFeedback').innerText = `Added ${data.new_keys_added} new keys! Total pool: ${data.total_keys}`;
+      fetchStatus();
+      setTimeout(() => closeModal('pasteKeysModal'), 1500);
+    } catch (e) { alert('Paste error: ' + e); }
+  }
+
+  async function submitNewAccount() {
+    const email = document.getElementById('newAccountEmail').value.trim();
+    const name = document.getElementById('newAccountName').value.trim();
+    if (!email) return alert('Please enter email.');
+    try {
+      const res = await fetch('/api/accounts/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name })
+      });
+      const data = await res.json();
+      if (data.success) {
+        closeModal('addAccountModal');
+        fetchStatus();
+      } else {
+        alert(data.message);
+      }
+    } catch (e) { alert('Add account error: ' + e); }
+  }
+
+  function openAddAccountModal() { document.getElementById('addAccountModal').style.display = 'flex'; }
+  function openPasteKeysModal() { document.getElementById('pasteKeysModal').style.display = 'flex'; }
+  function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+  function clearConsole() { document.getElementById('consoleLog').innerHTML = ''; }
+  function scrollToKB() { document.getElementById('kbSection').scrollIntoView({ behavior: 'smooth' }); }
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Load config on init
+  async function loadConfigInputs() {
+    try {
+      const res = await fetch('/api/config');
+      const cfg = await res.json();
+      if (cfg.questions_per_batch) document.getElementById('cfgBatchSize').value = cfg.questions_per_batch;
+      if (cfg.batch_break_seconds) document.getElementById('cfgBreakTime').value = cfg.batch_break_seconds;
+      if (cfg.min_keys_threshold) document.getElementById('cfgMinKeys').value = cfg.min_keys_threshold;
+      if (cfg.target_keys_topup) document.getElementById('cfgTopUpTarget').value = cfg.target_keys_topup;
+    } catch (e) {}
+  }
+
+  // Start polling
+  loadConfigInputs();
+  fetchStatus();
+  fetchKB();
+  pollInterval = setInterval(fetchStatus, 2000);
+</script>
+
+</body>
+</html>

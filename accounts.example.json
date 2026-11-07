@@ -1,0 +1,14 @@
+{
+  "active_account": "user@example.com",
+  "accounts": {
+    "user@example.com": {
+      "name": "Primary Account",
+      "keys_balance": 0,
+      "total_questions_solved": 0,
+      "correct_answers": 0,
+      "wrong_answers": 0,
+      "total_keys_redeemed": 0,
+      "last_key_index": 0
+    }
+  }
+}

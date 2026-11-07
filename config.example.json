@@ -1,0 +1,10 @@
+{
+  "gemini_api_key": "",
+  "device_serial": "",
+  "target_keys_topup": 100,
+  "min_keys_threshold": 10,
+  "questions_per_batch": 20,
+  "batch_break_seconds": 30,
+  "screen_brightness_dimmed": 0,
+  "screen_brightness_normal": 60
+}

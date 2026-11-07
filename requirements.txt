@@ -1,0 +1,9 @@
+# Nusuk Master HQ - Autonomous Android Quiz & Keys Orchestrator
+# Built with Python Standard Library - ZERO external pip packages strictly required!
+# Compatible with Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13, 3.14+
+
+# System Prerequisite:
+# Android Debug Bridge (ADB) must be installed on your system:
+# - macOS:   brew install android-platform-tools
+# - Ubuntu:  sudo apt install adb
+# - Windows: Download SDK Platform Tools from developer.android.com
