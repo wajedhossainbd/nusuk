@@ -134,7 +134,7 @@ The dashboard creates and manages `config.json` automatically. You can also edit
 }
 ```
 
-* `device_serial`: Leave empty `""` to auto-detect any connected device, or specify a serial (e.g. `192.168.0.187:5555`).
+* `device_serial`: Leave empty `""` to auto-detect any connected device, or specify a serial (e.g. `192.168.1.50:5555`).
 * `questions_per_batch`: Number of questions to answer before taking a breather.
 * `batch_break_seconds`: Rest duration (seconds) between quiz batches.
 * `min_keys_threshold`: When your key balance falls below this number, the engine automatically pauses quizzes to redeem keys from the master pool.
